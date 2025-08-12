@@ -11,7 +11,7 @@ backToTopBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Fade-in nas seções ao rolar
+// Fade-in nas seções
 const sections = document.querySelectorAll('main section');
 const fadeInOnScroll = () => {
   sections.forEach(section => {
@@ -23,3 +23,11 @@ const fadeInOnScroll = () => {
 };
 window.addEventListener('scroll', fadeInOnScroll);
 window.addEventListener('load', fadeInOnScroll);
+
+// Toggle do menu hambúrguer
+const navToggle = document.querySelector('.nav-toggle');
+const nav = document.querySelector('nav');
+
+navToggle.addEventListener('click', () => {
+  nav.classList.toggle('open');
+});
