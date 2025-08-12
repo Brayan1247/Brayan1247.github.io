@@ -6,35 +6,28 @@
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-/* Plano de fundo */
 body {
   min-height: 100vh;
   background: linear-gradient(135deg, #0a192f 0%, #1f4068 100%);
   color: #e0e0e0;
 }
 
-/* Header */
+/* Header flexível */
 header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   background: rgba(17, 17, 17, 0.98);
-  padding: 32px 20px 24px 20px;
-  text-align: center;
+  padding: 32px 20px 24px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.25);
   border-bottom: 2px solid #00aaff;
-}
-
-header h1 {
-  color: #00aaff;
-  font-size: 2.5rem;
-  letter-spacing: 2px;
-  margin-bottom: 8px;
 }
 
 /* Logo */
 .logo {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
   gap: 10px;
 }
 
@@ -51,16 +44,21 @@ header h1 {
   text-shadow: 0 2px 8px #00aaff55;
 }
 
-/* Navegação */
-nav ul {
-  list-style: none;
-  margin-top: 10px;
-  padding: 0;
+/* Botão de menu */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #00aaff;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
-nav ul li {
-  display: inline-block;
-  margin: 0 18px;
+/* Navegação */
+nav ul {
+  display: flex;
+  gap: 24px;
+  list-style: none;
 }
 
 nav ul li a {
@@ -70,15 +68,12 @@ nav ul li a {
   font-size: 1.1rem;
   padding: 6px 18px;
   border-radius: 6px;
-  transition: 
-    background 0.2s, 
-    color 0.2s, 
-    transform 0.2s, 
-    box-shadow 0.2s;
+  transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 0 0 rgba(0,170,255,0);
 }
 
-nav ul li a:hover, nav ul li a:focus {
+nav ul li a:hover,
+nav ul li a:focus {
   background: #00aaff;
   color: #fff;
   transform: scale(1.08);
@@ -88,9 +83,10 @@ nav ul li a:hover, nav ul li a:focus {
 
 /* Conteúdo principal */
 main {
-  padding: 48px 24px 80px 24px;
+  width: 90%;
   max-width: 900px;
   margin: 0 auto;
+  padding: 2rem 1rem 5rem;
 }
 
 main section {
@@ -106,10 +102,17 @@ main section:hover {
   box-shadow: 0 6px 32px rgba(0,0,0,0.25);
 }
 
+h1 {
+  color: #00aaff;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
 h2 {
   color: #00aaff;
   margin-bottom: 16px;
-  font-size: 1.7rem;
+  font-size: clamp(1.4rem, 3vw, 1.7rem);
   border-left: 4px solid #00aaff;
   padding-left: 12px;
 }
@@ -124,7 +127,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Footer */
+/* Footer fixo */
 footer {
   background: rgba(17, 17, 17, 0.98);
   text-align: center;
@@ -139,7 +142,7 @@ footer {
   box-shadow: 0 -2px 16px rgba(0,0,0,0.25);
 }
 
-/* Animações */
+/* Fade-in nas seções */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -151,7 +154,7 @@ footer {
   transform: translateY(0);
 }
 
-/* Botão "Voltar ao Topo" */
+/* Botão Voltar ao Topo */
 #backToTop {
   position: fixed;
   bottom: 32px;
@@ -164,15 +167,12 @@ footer {
   height: 48px;
   cursor: pointer;
   font-size: 28px;
-  line-height: 1;
-  padding: 0;
   display: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  z-index: 999;
-  transition: background 0.2s, transform 0.2s;
-  display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  z-index: 999;
+  transition: background 0.2s, transform 0.2s;
 }
 
 #backToTop:hover {
@@ -181,28 +181,72 @@ footer {
 }
 
 /* Responsividade */
-@media (max-width: 700px) {
-  main {
-    padding: 24px 6px 90px 6px;
-  }
-  main section {
-    padding: 18px 8px;
-  }
-  header h1 {
-    font-size: 1.5rem;
-  }
-  nav ul li {
-    margin: 0 8px;
-  }
+@media (max-width: 900px) {
   #backToTop {
-    right: 12px;
-    bottom: 70px;
+    right: 24px;
+    bottom: 80px;
+  }
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  nav {
+    width: 100%;
+    display: none;
+  }
+
+  nav.open {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 0;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 12px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  main section {
+    padding: 1.2rem;
+  }
+
+  #backToTop {
     width: 40px;
     height: 40px;
-    font-size: 18px;
+    font-size: 20px;
   }
+
   footer {
-    font-size: 0.9rem;
-    padding: 12px 4px;
+    font-size: 0.85rem;
+    padding: 10px 4px;
   }
 }
